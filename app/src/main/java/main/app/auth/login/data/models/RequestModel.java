@@ -1,13 +1,12 @@
-package main.app.auth.login.data.remote;
+package main.app.auth.login.data.models;
 
-/**
- * @class - Class for sending login request body
- */
-public class LoginRequest {
+
+public class RequestModel {
     public String username;
     public String password;
 
-    public LoginRequest(String username, String password) {
+
+    public RequestModel(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -21,3 +20,6 @@ public class LoginRequest {
     };
 
 }
+
+
+

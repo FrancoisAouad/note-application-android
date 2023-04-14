@@ -1,13 +1,10 @@
 package main.app.auth.login.data.models;
 
-/**
- * @class - Class used to verify login response
- */
-public class UserModel {
+public class ResponseModel {
     private String accessToken;
     private String refreshToken;
 
-    public UserModel(String accessToken, String refreshToken) {
+    public ResponseModel(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }

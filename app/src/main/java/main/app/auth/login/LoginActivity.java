@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import main.app.MainActivity;
 import main.app.R;
-import main.app.auth.login.data.remote.LoginRequest;
-import main.app.auth.login.viewModels.UserViewModel;
+import main.app.auth.login.data.models.RequestModel;
+import main.app.auth.login.viewModels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
-    UserViewModel userViewModel;
+    LoginViewModel loginViewModel;
     EditText username, password;
     Button loginButton;
 
@@ -28,10 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getUserLiveData().observe(this, userModel -> {
-            // Handle success scenario - save the user data and navigate to the next screen
-            // for example, you could save the tokens to SharedPreferences and navigate to the HomeActivity
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        loginViewModel.getUserLiveData().observe(this, userModel -> {
             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -41,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             final String user = username.getText().toString();
             final String pass = password.getText().toString();
-            LoginRequest loginRequest = new LoginRequest(user, pass);
-            userViewModel.login(loginRequest);
+            RequestModel requestModel = new RequestModel(user, pass);
+            loginViewModel.login(requestModel);
         });
     }
 }
