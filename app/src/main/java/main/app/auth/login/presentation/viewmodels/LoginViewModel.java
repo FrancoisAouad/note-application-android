@@ -19,18 +19,17 @@ public class LoginViewModel extends ViewModel {
     private final LoginRepository loginRepository;
     public MutableLiveData<ResponseModel> loginResponse = new MutableLiveData<>();
 
-
     @Inject
     public LoginViewModel(LoginRepository repository) {
         this.loginRepository = repository;
     }
-
 
     public void login(RequestModel requestModel) {
         loginRepository.login(requestModel).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful()){
+                    System.out.println("SUCCESS");
                     loginResponse.postValue(response.body());
                 }
             }

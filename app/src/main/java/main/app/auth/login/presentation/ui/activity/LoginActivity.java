@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,26 +28,32 @@ import main.app.databinding.ActivityLoginBinding;
 @AndroidEntryPoint
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
-    @Inject
     LoginViewModel loginViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel.login(new RequestModel("", ""));
+        initViews();
+        implementListeners();
+        initObservers();
+
+    }
+
+    private void initObservers() {
         loginViewModel.loginResponse.observe(this, responseModel -> {
             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
+    }
 
+    private void implementListeners() {
         binding.loginButton.setOnClickListener(v -> {
-            final String user = binding.username.getText().toString();
-            final String pass = binding.password.getText().toString();
+            final String user = binding.username.getText().toString().trim();
+            final String pass = binding.password.getText().toString().trim();
             RequestModel requestModel = new RequestModel(user, pass);
             loginViewModel.login(requestModel);
         });
@@ -56,5 +63,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+    }
+
+    private void initViews() {
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
     }
 }
