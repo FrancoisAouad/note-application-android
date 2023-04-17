@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import main.app.MainActivity;
 import main.app.R;
+import main.app.auth.login.LoginActivity;
 import main.app.auth.register.data.models.RequestModel;
 import main.app.auth.register.viewModels.RegisterViewModel;
 
@@ -23,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         RegisterViewModel registerViewModel;
         EditText firstName, lastName, username, email, password, confirmPassword;
+        TextView login;
         Button registerButton;
 
         firstName = findViewById(R.id.firstName);
@@ -32,10 +35,10 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
         registerButton = findViewById(R.id.registerButton);
+        login = findViewById(R.id.login);
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registerViewModel.getUserLiveData().observe(this, userModel -> {
-            System.out.println("BEDORE INTENT: " + userModel);
             Toast.makeText(RegisterActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
@@ -50,8 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
             final String pass = password.getText().toString();
             final String confirm = confirmPassword.getText().toString();
             RequestModel requestModel = new RequestModel(first, last, user, emai, pass, confirm);
-            System.out.println("INSIDE BUTTON: " + requestModel);
             registerViewModel.register(requestModel);
         });
+
+        login.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

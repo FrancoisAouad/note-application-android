@@ -13,11 +13,12 @@ import main.app.MainActivity;
 import main.app.R;
 import main.app.auth.login.data.models.RequestModel;
 import main.app.auth.login.viewModels.LoginViewModel;
+import main.app.auth.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
     LoginViewModel loginViewModel;
     EditText username, password;
-    Button loginButton;
+    Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getUserLiveData().observe(this, userModel -> {
@@ -42,5 +44,12 @@ public class LoginActivity extends AppCompatActivity {
             RequestModel requestModel = new RequestModel(user, pass);
             loginViewModel.login(requestModel);
         });
+
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
     }
 }
