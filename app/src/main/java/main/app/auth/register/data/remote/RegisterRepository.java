@@ -28,32 +28,32 @@ public class RegisterRepository {
         return userMutableLiveData;
     }
 
-    public void register(RequestModel requestModel) {
-        Retrofit retrofit = globalService.initializeRetrofit();
-        RegisterService registerService = retrofit.create(RegisterService.class);
-        Call<ResponseModel> call = registerService.register(requestModel);
-        call.enqueue(new Callback<ResponseModel>() {
-            @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        String errorMessage = response.errorBody().toString();
-                        JSONObject jsonObject = new JSONObject(errorMessage);
-                        String message = jsonObject.getString("message");
-                        int statusCode = jsonObject.getInt("statusCode");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                ResponseModel user = response.body();
-                userMutableLiveData.postValue(user);
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void register(RequestModel requestModel) {
+//        Retrofit retrofit = globalService.initializeRetrofit();
+//        RegisterService registerService = retrofit.create(RegisterService.class);
+//        Call<ResponseModel> call = registerService.register(requestModel);
+//        call.enqueue(new Callback<ResponseModel>() {
+//            @Override
+//            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+//                if (!response.isSuccessful()) {
+//                    try {
+//                        String errorMessage = response.errorBody().toString();
+//                        JSONObject jsonObject = new JSONObject(errorMessage);
+//                        String message = jsonObject.getString("message");
+//                        int statusCode = jsonObject.getInt("statusCode");
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                ResponseModel user = response.body();
+//                userMutableLiveData.postValue(user);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseModel> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 }
 

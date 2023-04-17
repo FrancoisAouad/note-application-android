@@ -1,6 +1,7 @@
-package main.app.auth.login;
+package main.app.auth.login.presentation.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -9,47 +10,51 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import main.app.MainActivity;
 import main.app.R;
 import main.app.auth.login.data.models.RequestModel;
-import main.app.auth.login.viewModels.LoginViewModel;
+import main.app.auth.login.data.models.ResponseModel;
+import main.app.auth.login.data.remote.LoginService;
+import main.app.auth.login.presentation.viewmodels.LoginViewModel;
 import main.app.auth.register.RegisterActivity;
+import main.app.databinding.ActivityLoginBinding;
 
+@AndroidEntryPoint
 public class LoginActivity extends AppCompatActivity {
+    private ActivityLoginBinding binding;
+    @Inject
     LoginViewModel loginViewModel;
-    EditText username, password;
-    Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
-
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        loginViewModel.getUserLiveData().observe(this, userModel -> {
+        loginViewModel.login(new RequestModel("", ""));
+        loginViewModel.loginResponse.observe(this, responseModel -> {
             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
-        loginButton.setOnClickListener(v -> {
-            final String user = username.getText().toString();
-            final String pass = password.getText().toString();
+        binding.loginButton.setOnClickListener(v -> {
+            final String user = binding.username.getText().toString();
+            final String pass = binding.password.getText().toString();
             RequestModel requestModel = new RequestModel(user, pass);
             loginViewModel.login(requestModel);
         });
 
-        registerButton.setOnClickListener(v -> {
+        binding.registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
             finish();
         });
-
     }
 }

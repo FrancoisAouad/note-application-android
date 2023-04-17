@@ -8,7 +8,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface RegisterService {
-    @Headers("Content-Type: application/json")
     @POST("api/auth/register")
     Call<ResponseModel> register(
             @Body RequestModel requestModel

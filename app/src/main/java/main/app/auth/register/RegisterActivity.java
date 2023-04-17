@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import main.app.MainActivity;
 import main.app.R;
-import main.app.auth.login.LoginActivity;
+import main.app.auth.login.presentation.ui.activity.LoginActivity;
 import main.app.auth.register.data.models.RequestModel;
 import main.app.auth.register.viewModels.RegisterViewModel;
 
