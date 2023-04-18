@@ -8,36 +8,36 @@ import androidx.lifecycle.ViewModel;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import main.app.auth.data.models.login.ResponseModel;
-import main.app.auth.data.models.login.RequestModel;
-import main.app.auth.data.api.login.LoginRepository;
+import main.app.auth.data.api.AuthRepository;
+import main.app.auth.data.models.login.LoginRequestModel;
+import main.app.auth.data.models.login.LoginResponseModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 @HiltViewModel
 public class LoginViewModel extends ViewModel {
-    private final LoginRepository loginRepository;
-    public MutableLiveData<ResponseModel> loginResponse = new MutableLiveData<>();
+    private final AuthRepository authRepository;
+    public MutableLiveData<LoginResponseModel> loginResponse = new MutableLiveData<>();
 
     @Inject
-    public LoginViewModel(LoginRepository repository) {
-        this.loginRepository = repository;
+    public LoginViewModel(AuthRepository repository) {
+        this.authRepository = repository;
     }
 
-    public void login(RequestModel requestModel) {
-        loginRepository.login(requestModel).enqueue(new Callback<ResponseModel>() {
+
+    public void login(LoginRequestModel loginRequestModel) {
+        authRepository.loginUser(loginRequestModel).enqueue(new Callback<LoginResponseModel>() {
             @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                 if (response.isSuccessful()) {
-                    Log.e("TEST", "" + response.body());
-                    System.out.println("SUCCESS");
+                    Log.e("Login ViewModel", "SUCCESS");
                     loginResponse.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
 
             }
         });

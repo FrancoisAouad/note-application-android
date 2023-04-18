@@ -5,65 +5,63 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import main.app.MainActivity;
-import main.app.R;
-import main.app.auth.data.models.register.RequestModel;
+
+import main.app.auth.data.models.register.RegisterRequestModel;
 import main.app.auth.screens.viewModels.RegisterViewModel;
-import main.app.utils.Prefs;
+import main.app.databinding.ActivityRegisterBinding;
 
 @AndroidEntryPoint
 public class RegisterActivity extends AppCompatActivity {
+    private ActivityRegisterBinding binding;
+    RegisterViewModel registerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        RegisterViewModel registerViewModel;
-        EditText firstName, lastName, username, email, password, confirmPassword;
-        TextView login;
-        Button registerButton;
+        initViews();
+        implementListeners();
+        initObservers();
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        username = findViewById(R.id.username);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        confirmPassword = findViewById(R.id.confirmPassword);
-        registerButton = findViewById(R.id.registerButton);
-        login = findViewById(R.id.login);
+    }
 
-        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        registerViewModel.result.observe(this, userModel -> {
-            Prefs.loadPrefs(this).saveString(Prefs.PREF_ACCESS_TOKEN,userModel.getAccessToken());
+    private void initObservers() {
+        registerViewModel.registerResponse.observe(this, userModel -> {
             Toast.makeText(RegisterActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
+    }
 
-        registerButton.setOnClickListener(v -> {
-            final String first = firstName.getText().toString();
-            final String last = lastName.getText().toString();
-            final String user = username.getText().toString();
-            final String emai = email.getText().toString();
-            final String pass = password.getText().toString();
-            final String confirm = confirmPassword.getText().toString();
-            RequestModel requestModel = new RequestModel(first, last, user, emai, pass, confirm);
-            registerViewModel.register(requestModel);
-//            registerViewModel.register(requestModel);
+    private void implementListeners() {
+        binding.registerButton.setOnClickListener(v -> {
+
+            final String firstName = binding.firstName.getText().toString();
+            final String lastName = binding.lastName.getText().toString();
+            final String username = binding.username.getText().toString();
+            final String email = binding.email.getText().toString();
+            final String password = binding.password.getText().toString();
+            final String confirmPassword = binding.confirmPassword.getText().toString();
+            RegisterRequestModel registerRequestModel = new RegisterRequestModel(firstName, lastName, username, email, password, confirmPassword);
+            registerViewModel.register(registerRequestModel);
         });
 
-        login.setOnClickListener(v -> {
+
+        binding.login.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         });
+    }
 
+    private void initViews() {
+        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
     }
 }

@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import main.app.MainActivity;
-import main.app.auth.data.models.login.RequestModel;
+//import main.app.auth.data.models.login.LoginRequestModel;
+//import main.app.auth.data.models.login.RequestModel;
+import main.app.auth.data.models.login.LoginRequestModel;
 import main.app.auth.screens.viewModels.LoginViewModel;
 import main.app.databinding.ActivityLoginBinding;
 
@@ -43,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(v -> {
             final String user = binding.username.getText().toString().trim();
             final String pass = binding.password.getText().toString().trim();
-            RequestModel requestModel = new RequestModel(user, pass);
-            loginViewModel.login(requestModel);
+            LoginRequestModel loginRequestModel = new LoginRequestModel(user, pass);
+            loginViewModel.login(loginRequestModel);
         });
 
         binding.registerButton.setOnClickListener(v -> {

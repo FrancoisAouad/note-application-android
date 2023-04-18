@@ -8,36 +8,36 @@ import androidx.lifecycle.ViewModel;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import main.app.auth.data.models.register.ResponseModel;
-import main.app.auth.data.models.register.RequestModel;
-import main.app.auth.data.api.register.RegisterRepository;
+import main.app.auth.data.api.AuthRepository;
+import main.app.auth.data.models.register.RegisterRequestModel;
+import main.app.auth.data.models.register.RegisterResponseModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 @HiltViewModel
 public class RegisterViewModel extends ViewModel {
-    private final RegisterRepository registerRepository;
+    private final AuthRepository authRepository;
 
     @Inject
-    public RegisterViewModel(RegisterRepository registerRepository) {
-        this.registerRepository = registerRepository;
+    public RegisterViewModel(AuthRepository repository) {
+        this.authRepository = repository;
     }
 
-    public MutableLiveData<ResponseModel> result = new MutableLiveData<>();
+    public MutableLiveData<RegisterResponseModel> registerResponse = new MutableLiveData<>();
 
-    public void register(RequestModel requestModel) {
+    public void register(RegisterRequestModel registerRequestModel) {
 
-        registerRepository.registerUser(requestModel).enqueue(new Callback<ResponseModel>() {
+        authRepository.registerUser(registerRequestModel).enqueue(new Callback<RegisterResponseModel>() {
             @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+            public void onResponse(Call<RegisterResponseModel> call, Response<RegisterResponseModel> response) {
                 if (response.isSuccessful())
-                    Log.e("TEST", "" + response.body());
-                result.postValue(response.body());
+                    Log.e("Register ViewModel", "SUCCESS: " + response.body());
+                registerResponse.postValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
+            public void onFailure(Call<RegisterResponseModel> call, Throwable t) {
 
             }
         });
