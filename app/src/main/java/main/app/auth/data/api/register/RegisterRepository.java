@@ -1,12 +1,9 @@
-package main.app.auth.register.data.remote;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+package main.app.auth.data.api.register;
 
 import javax.inject.Inject;
 
-import main.app.auth.register.data.models.RequestModel;
-import main.app.auth.register.data.models.ResponseModel;
+import main.app.auth.data.models.register.RequestModel;
+import main.app.auth.data.models.register.ResponseModel;
 import retrofit2.Call;
 
 public class RegisterRepository {

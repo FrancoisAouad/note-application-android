@@ -1,7 +1,7 @@
-package main.app.auth.login.data.remote;
+package main.app.auth.data.api.login;
 
-import main.app.auth.login.data.models.RequestModel;
-import main.app.auth.login.data.models.ResponseModel;
+import main.app.auth.data.models.login.RequestModel;
+import main.app.auth.data.models.login.ResponseModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;

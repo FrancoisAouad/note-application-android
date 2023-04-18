@@ -1,10 +1,10 @@
-package main.app.auth.login.di;
+package main.app.auth.modules;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
-import main.app.auth.login.data.remote.LoginService;
+import main.app.auth.data.api.login.LoginService;
 import retrofit2.Retrofit;
 
 @Module

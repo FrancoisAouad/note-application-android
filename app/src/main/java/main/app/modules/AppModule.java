@@ -1,4 +1,4 @@
-package main.app.di;
+package main.app.modules;
 
 import android.content.Context;
 

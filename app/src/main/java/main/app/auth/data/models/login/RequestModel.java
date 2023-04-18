@@ -1,4 +1,4 @@
-package main.app.auth.login.data.models;
+package main.app.auth.data.models.login;
 
 import com.google.gson.annotations.SerializedName;
 

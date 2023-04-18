@@ -1,15 +1,16 @@
-package main.app.auth.login.presentation.viewmodels;
+package main.app.auth.screens.viewModels;
 
-import androidx.lifecycle.LiveData;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import main.app.auth.login.data.models.ResponseModel;
-import main.app.auth.login.data.models.RequestModel;
-import main.app.auth.login.data.remote.LoginRepository;
+import main.app.auth.data.models.login.ResponseModel;
+import main.app.auth.data.models.login.RequestModel;
+import main.app.auth.data.api.login.LoginRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +29,8 @@ public class LoginViewModel extends ViewModel {
         loginRepository.login(requestModel).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    Log.e("TEST", "" + response.body());
                     System.out.println("SUCCESS");
                     loginResponse.postValue(response.body());
                 }

@@ -1,10 +1,9 @@
-package main.app.auth.register.data.remote;
+package main.app.auth.data.api.register;
 
-import main.app.auth.register.data.models.RequestModel;
-import main.app.auth.register.data.models.ResponseModel;
+import main.app.auth.data.models.register.RequestModel;
+import main.app.auth.data.models.register.ResponseModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface RegisterService {

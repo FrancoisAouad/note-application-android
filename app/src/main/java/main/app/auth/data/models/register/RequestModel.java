@@ -1,4 +1,4 @@
-package main.app.auth.register.data.models;
+package main.app.auth.data.models.register;
 
 public class RequestModel {
     public String firstName;

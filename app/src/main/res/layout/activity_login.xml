@@ -7,7 +7,7 @@
     android:background="#FF673AB7"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".auth.login.presentation.ui.activity.LoginActivity">
+    tools:context=".auth.screens.ui.activities.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -42,8 +42,8 @@
                 android:layout_gravity="bottom"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Ready to start?"
                 android:includeFontPadding="false"
+                android:text="Ready to start?"
                 android:textColor="#673AB7"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -57,12 +57,18 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                </ImageView>-->
+
                 <EditText
                     android:id="@+id/username"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/login_edit_text"
                     android:gravity="center"
@@ -99,12 +105,13 @@
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/registerButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/login_button"
+                    android:background="@drawable/register_button"
                     android:text="Register"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"

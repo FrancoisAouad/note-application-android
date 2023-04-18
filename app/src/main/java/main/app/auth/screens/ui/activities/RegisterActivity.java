@@ -1,4 +1,4 @@
-package main.app.auth.register;
+package main.app.auth.screens.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,9 +13,8 @@ import android.widget.Toast;
 import dagger.hilt.android.AndroidEntryPoint;
 import main.app.MainActivity;
 import main.app.R;
-import main.app.auth.login.presentation.ui.activity.LoginActivity;
-import main.app.auth.register.data.models.RequestModel;
-import main.app.auth.register.viewModels.RegisterViewModel;
+import main.app.auth.data.models.register.RequestModel;
+import main.app.auth.screens.viewModels.RegisterViewModel;
 import main.app.utils.Prefs;
 
 @AndroidEntryPoint
