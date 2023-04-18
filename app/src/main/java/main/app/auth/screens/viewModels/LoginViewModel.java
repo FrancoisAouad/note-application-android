@@ -25,7 +25,6 @@ public class LoginViewModel extends ViewModel {
         this.authRepository = repository;
     }
 
-
     public void login(LoginRequestModel loginRequestModel) {
         authRepository.loginUser(loginRequestModel).enqueue(new Callback<LoginResponseModel>() {
             @Override
