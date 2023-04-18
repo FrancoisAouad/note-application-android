@@ -1,6 +1,6 @@
-package main.app.auth.register.data.models;
+package main.app.auth.data.models.register;
 
-public class RequestModel {
+public class RegisterRequestModel {
     public String firstName;
     public String lastName;
     public String username;
@@ -8,7 +8,7 @@ public class RequestModel {
     public String password;
     public String confirmPassword;
 
-    public RequestModel(String firstName, String lastName, String username, String email, String password, String confirmPassword) {
+    public RegisterRequestModel(String firstName, String lastName, String username, String email, String password, String confirmPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
