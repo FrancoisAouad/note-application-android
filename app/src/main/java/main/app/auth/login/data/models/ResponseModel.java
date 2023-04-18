@@ -1,8 +1,12 @@
 package main.app.auth.login.data.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ResponseModel {
-    private String accessToken;
-    private String refreshToken;
+    @SerializedName("accessToken")
+    private final String accessToken;
+    @SerializedName("refreshToken")
+    private final String refreshToken;
 
     public ResponseModel(String accessToken, String refreshToken) {
         this.accessToken = accessToken;

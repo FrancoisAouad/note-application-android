@@ -10,12 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import main.app.MainActivity;
 import main.app.R;
-import main.app.auth.login.LoginActivity;
+import main.app.auth.login.presentation.ui.activity.LoginActivity;
 import main.app.auth.register.data.models.RequestModel;
 import main.app.auth.register.viewModels.RegisterViewModel;
+import main.app.utils.Prefs;
 
+@AndroidEntryPoint
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -38,7 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        registerViewModel.getUserLiveData().observe(this, userModel -> {
+        registerViewModel.result.observe(this, userModel -> {
+            Prefs.loadPrefs(this).saveString(Prefs.PREF_ACCESS_TOKEN,userModel.getAccessToken());
             Toast.makeText(RegisterActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
@@ -54,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             final String confirm = confirmPassword.getText().toString();
             RequestModel requestModel = new RequestModel(first, last, user, emai, pass, confirm);
             registerViewModel.register(requestModel);
+//            registerViewModel.register(requestModel);
         });
 
         login.setOnClickListener(v -> {

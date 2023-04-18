@@ -7,7 +7,7 @@
     android:background="#FF673AB7"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".auth.login.LoginActivity">
+    tools:context=".auth.login.presentation.ui.activity.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

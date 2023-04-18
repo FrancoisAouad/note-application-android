@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar"
         android:usesCleartextTraffic="true"
+        android:name=".App"
         tools:targetApi="31">
         <activity
             android:name=".notes.NoteActivity"
@@ -27,7 +28,7 @@
             <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".auth.login.LoginActivity"
+            android:name=".auth.login.presentation.ui.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
