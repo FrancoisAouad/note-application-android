@@ -37,7 +37,7 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<LoginResponseModel> call, Throwable t) {
-
+                Log.e("LoginVM", "FAILED /auth/api");
             }
         });
     }

@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void implementListeners() {
         binding.loginButton.setOnClickListener(v -> {
+            Toast.makeText(this, "LOGIN BUTTON CLICKED".toString(), Toast.LENGTH_LONG).show();
             final String username = binding.username.getText().toString().trim();
             final String password = binding.password.getText().toString().trim();
             LoginRequestModel loginRequestModel = new LoginRequestModel(username, password);
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.registerButton.setOnClickListener(v -> {
+            Toast.makeText(this, "REGISTER BUTTON CLICKED".toString(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
             finish();

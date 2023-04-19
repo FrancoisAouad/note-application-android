@@ -17,34 +17,24 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface AuthService {
-    @Headers("Content-Type: application/json")
-    @POST("api/auth/register")
-    Call<RegisterResponseModel> register(
-            @Body RegisterRequestModel registerRequestModel
-    );
+        @POST("api/auth/register")
+        Call<RegisterResponseModel> register(
+                        @Body RegisterRequestModel registerRequestModel);
 
-    @Headers("Content-Type: application/json")
-    @POST("api/auth/login")
-    Call<LoginResponseModel> login(
-            @Body LoginRequestModel loginRequestModel
-    );
+        @POST("api/auth/login")
+        Call<LoginResponseModel> login(
+                        @Body LoginRequestModel loginRequestModel);
 
-    @Headers("Content-Type: application/json")
-    @DELETE("api/auth/logout")
-    Call<LogoutResponseModel> logout(
-            @Body LogoutRequestModel logoutRequestModel
-    );
+        @DELETE("api/auth/logout")
+        Call<LogoutResponseModel> logout(
+                        @Body LogoutRequestModel logoutRequestModel);
 
-    @Headers("Content-Type: application/json")
-    @POST("api/auth/refresh-token")
-    Call<RefreshTokenResponseModel> refreshToken(
-            @Body RefreshTokenRequestModel refreshTokenRequestModel
-    );
+        @POST("api/auth/refresh-token")
+        Call<RefreshTokenResponseModel> refreshToken(
+                        @Body RefreshTokenRequestModel refreshTokenRequestModel);
 
-    @Headers("Content-Type: application/json")
-    @POST("api/auth/forgot-password")
-    Call<ForgotPasswordResponseModel> forgotPassword(
-            @Body ForgotPasswordRequestModel forgotPasswordRequestModel
-    );
+        @POST("api/auth/forgot-password")
+        Call<ForgotPasswordResponseModel> forgotPassword(
+                        @Body ForgotPasswordRequestModel forgotPasswordRequestModel);
 
 }
